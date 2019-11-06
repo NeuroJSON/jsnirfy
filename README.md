@@ -32,6 +32,36 @@ This toolbox is selectively dependent on the below toolboxes
   the JSONLab toolbox http://github.com/fangq/jsonlab as well as ZMat toolbox
   http://github.com/fangq/zmat ; this is supported on both MATLAB and Octave.
 
+## Why JSNIRF?
+
+A SNIRF data file is basically an HDF5 file. HDF5 (Hierarchical Data Format version 5)
+is a general purpose file format for storing flexible binary data. However, it has
+the below limitations:
+
+- it is binary, not human readable, you must use a parser to load the file
+  and understand the content
+- it requires a spacial library, although widely and freely available, to load
+  or save such file
+- HDF5 is a very sophisticated format; writing your own parser is quite difficult
+- when storing a small dataset, an HDF5 file has an overhead in file size
+
+In comparison, the JSNIRF data format is defined based on the JData specification.
+and supports both a text-based interface and a binary interface. The text form
+JSNIRF file is a plain JSON file, and has various advantages
+
+- JSNIRF is human readable, you can read the data using an editor
+- JSNIRF is very simple (because JSON format is very simple)
+- JSNIRF is lightweight, little overhead for storing small datasets
+- JSNIRF can be readily parsed by numerous free JSON parsers available
+- Programming your own specialized JSNIRF parser is very easy to write
+
+The binary JSNIRF format uses a binary JSON format (UBJSON) which is also
+- quasi-human readable despite it is binary
+- over 20 free parsers available
+- easy to write your own parser because of the simplicity
+
+
+
 ## SNIRF and JSNIRF format compatibility
 
 The JSNIRF data structure is highly compatible with the SNIRF data structure.
