@@ -53,9 +53,9 @@ end
 data='';
 
 if(regexp(filename,'\.[Jj][Nn][Ii][Rr][Ss]$'))
-    data=savejson('',jnirs,filename,varargin{:});
+    data=savejson('',jnirs,'filename',filename,varargin{:});
 elseif(regexp(filename,'\.[Bb][Nn][Ii][Rr][Ss]$'))
-    data=saveubjson('',jnirs,filename,varargin{:});
+    data=saveubjson('',jnirs,'filename',filename,varargin{:});
 elseif(~isempty(regexp(filename,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once'))|| ~isempty(regexp(outfile,'\.[Hh]5$', 'once')))
     saveh5(jnirs,filename,varargin{:});
 else

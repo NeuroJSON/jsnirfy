@@ -33,13 +33,14 @@ function jsn=jsnirfcreate(varargin)
 % define empty SNIRF data structure with all required fields
 
 defaultmeta=struct('SubjectID','default','MeasurementDate',datestr(now,29),...
-                'MeasurementTime',datestr(now,'hh:mm:ss'),'LengthUnit','mm', 'TimeUnit','s');
+                'MeasurementTime',datestr(now,'hh:mm:ss'),'LengthUnit','mm', ...
+                'TimeUnit','s', 'FrequencyUnit','Hz');
 defaultsrcmap=struct('sourceIndex',[],'detectorIndex',[],...
               'wavelengthIndex',[],'dataType',1,'dataTypeIndex',1); 
 defaultdata=struct('dataTimeSeries',[],'time',[],'measurementList',defaultsrcmap);
 defaultaux=struct('name','','dataTimeSeries',[],'time',[],'timeOffset',0);
 defaultstim=struct('name','','data',[]);
-defaultprobe=struct('wavelengths',[],'sourcePos',[],'detectorPos',[]);
+defaultprobe=struct('wavelengths',[],'sourcePos2D',[],'detectorPos2D',[]);
 
 nirsdata=struct('metaDataTags',defaultmeta,...
                 'data',defaultdata,...

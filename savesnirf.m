@@ -53,6 +53,6 @@ if(~isempty(outfile))
     elseif(regexp(outfile,'\.[Bb][Nn][Ii][Rr][Ss]$'))
         saveubjson('SNIRDData',data,'FileName',outfile,opt);
     else
-        error('only support .jnirs,.bnirs and .mat files');
+        error('only support .snirf, .h5, .jnirs, .bnirs and .mat files');
     end
 end
