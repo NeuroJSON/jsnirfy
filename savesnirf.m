@@ -44,7 +44,13 @@ if(isfield(data,'SNIRFData'))
 end
 
 if(~isempty(outfile))
-    if(~isempty(regexp(outfile,'\.[Hh]5$', 'once')) || ~isempty(regexp(outfile,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')))
+    if(~isempty(regexp(outfile,'\.[Hh]5$', 'once'))) 
+        saveh5(data,outfile,opt);
+    elseif(~isempty(regexp(outfile,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')))
+        data.nirs.data=forceindex(data.nirs.data,'measurementList');
+        data.nirs=forceindex(data.nirs,'data');
+        data.nirs=forceindex(data.nirs,'stim');
+        data.nirs=forceindex(data.nirs,'aux');
         saveh5(data,outfile,opt);
     elseif(~isempty(regexp(outfile,'\.[Jj][Nn][Ii][Rr][Ss]$', 'once'))|| ~isempty(regexp(outfile,'\.[Jj][Ss][Oo][Nn]$', 'once')))
         savejson('SNIRDData',data,'FileName',outfile,opt);
@@ -56,3 +62,16 @@ if(~isempty(outfile))
         error('only support .snirf, .h5, .jnirs, .bnirs and .mat files');
     end
 end
+
+% force adding index 1 to the group name for singular struct and cell
+function newroot=forceindex(root,name)
+newroot=root;
+fields=fieldnames(newroot);
+idx=find(ismember(fields,name));
+if(~isempty(idx) && length(newroot.(name))==1)
+    newroot.(sprintf('%s1',name))=newroot.(name);
+    newroot=rmfield(newroot,name);
+    fields{idx(1)}=sprintf('%s1',name);
+    newroot=orderfields(newroot,fields);
+end
+
