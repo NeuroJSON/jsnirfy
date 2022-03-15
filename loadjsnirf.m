@@ -6,7 +6,7 @@ function jnirs=loadjsnirf(filename, varargin)
 %
 %    Load a text (.jnirs or .json) or binary (.bnirs) based JSNIRF 
 %    file defined in the JSNIRF specification:
-%    https://github.com/fangq/jsnirf or a .snirf/.h5 SNIRF data defined in
+%    https://github.com/NeuroJSON/jsnirf or a .snirf/.h5 SNIRF data defined in
 %    the SNIRF specification https://github.com/fNIRS/snirf
 %
 %    author: Qianqian Fang (q.fang <at> neu.edu)
@@ -30,9 +30,9 @@ function jnirs=loadjsnirf(filename, varargin)
 %    example:
 %        newjnirs=loadjsnirf('subject1.jnirs');
 %
-%    this file is part of JSNIRF specification: https://github.com/fangq/jsnirf
+%    this file is part of JSNIRF specification: https://github.com/NeuroJSON/jsnirf
 %
-%    License: GPLv3 or Apache 2.0, see https://github.com/fangq/jsnirf for details
+%    License: GPLv3 or Apache 2.0, see https://github.com/NeuroJSON/jsnirf for details
 %
 
 if(nargin<1)
@@ -40,7 +40,7 @@ if(nargin<1)
 end
 
 if(~exist('savejson','file'))
-    error('you must first install JSONLab from http://github.com/fangq/jsonlab/');
+    error('you must first install JSONLab from http://github.com/NeuroJSON/jsonlab/');
 end
 
 if(~isempty(regexp(filename,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')) || ~isempty(regexp(filename,'\.[Hh]5$', 'once')))

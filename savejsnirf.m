@@ -5,7 +5,7 @@ function data=savejsnirf(jnirs, filename, varargin)
 %    savejsnirf(jnirs, outputfile, 'Param1',value1, 'Param2',value2,...)
 %
 %    Save an in-memory JSNIRF structure into a JSNIRF file with format
-%    defined in JSNIRF specification: https://github.com/fangq/jsnirf
+%    defined in JSNIRF specification: https://github.com/NeuroJSON/jsnirf
 %
 %    author: Qianqian Fang (q.fang <at> neu.edu)
 %
@@ -26,7 +26,7 @@ function data=savejsnirf(jnirs, filename, varargin)
 %
 %    dependency:
 %        - the savejson and savebj functions are provided by the JSONLab 
-%          toolbox at http://github.com/fangq/jsonlab 
+%          toolbox at http://github.com/NeuroJSON/jsonlab 
 %        - if data compression is specified by 'compression','zlib' param/value 
 %          pairs, ZMat toolbox will be needed, http://github.com/fangq/zmat
 %        - the saveh5 function is provided by the eazyh5 toolbox at 
@@ -37,9 +37,9 @@ function data=savejsnirf(jnirs, filename, varargin)
 %        savejsnirf(jnirs, 'test.jnirs');
 %        savejsnirf(jnirs, 'test.bnirs','compression','zlib');
 %
-%    this file is part of JSNIRF specification: https://github.com/fangq/jsnirf
+%    this file is part of JSNIRF specification: https://github.com/NeuroJSON/jsnirf
 %
-%    License: GPLv3 or Apache 2.0, see https://github.com/fangq/jsnirf for details
+%    License: GPLv3 or Apache 2.0, see https://github.com/NeuroJSON/jsnirf for details
 %
 
 if(nargin<2)
@@ -47,7 +47,7 @@ if(nargin<2)
 end
 
 if(~exist('savejson','file'))
-    error('you must first install JSONLab from http://github.com/fangq/jsonlab/');
+    error('you must first install JSONLab from http://github.com/NeuroJSON/jsonlab/');
 end
 
 data='';

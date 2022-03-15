@@ -6,7 +6,7 @@ function savesnirf(data, outfile,varargin)
 %
 %    Load an HDF5 based SNIRF file, and optionally convert it to a JSON 
 %    file based on the JSNIRF specification:
-%    https://github.com/fangq/jsnirf
+%    https://github.com/NeuroJSON/jsnirf
 %
 %    author: Qianqian Fang (q.fang <at> neu.edu)
 %
@@ -22,9 +22,9 @@ function savesnirf(data, outfile,varargin)
 %        data=loadsnirf('test.snirf');
 %        savesnirf(data,'newfile.snirf');
 %
-%    this file is part of JSNIRF specification: https://github.com/fangq/jsnirf
+%    this file is part of JSNIRF specification: https://github.com/NeuroJSON/jsnirf
 %
-%    License: GPLv3 or Apache 2.0, see https://github.com/fangq/jsnirf for details
+%    License: GPLv3 or Apache 2.0, see https://github.com/NeuroJSON/jsnirf for details
 %
 
 if(nargin<2 || ~ischar(outfile))
