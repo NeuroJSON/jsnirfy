@@ -52,9 +52,9 @@ end
 outfile=jsonopt('FileName','',opt);
 if(~isempty(outfile))
     if(regexp(outfile,'\.[Bb][Nn][Ii][Rr][Ss]$'))
-        saveubjson('SNIRDData',data,'FileName',outfile,opt);
+        savebj('SNIRFData',data,'FileName',outfile,opt);
     elseif(~isempty(regexp(outfile,'\.[Jj][Nn][Ii][Rr][Ss]$', 'once'))|| ~isempty(regexp(outfile,'\.[Jj][Ss][Oo][Nn]$', 'once')))
-        savejson('SNIRDData',data,'FileName',outfile,opt);
+        savejson('SNIRFData',data,'FileName',outfile,opt);
     elseif(regexp(outfile,'\.[Mm][Aa][Tt]$'))
         save(outfile,'data');
     else

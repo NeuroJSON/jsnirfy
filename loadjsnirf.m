@@ -17,7 +17,7 @@ function jnirs=loadjsnirf(filename, varargin)
 %                *.jnirs for text JSNIRF file
 %                *.snirf for HDF5/SNITRF files
 %        options: (optional) if loading from a .bnii file, please see the options for
-%               loadubjson.m (part of JSONLab); if loading from a .jnirs, please see the 
+%               loadbj.m (part of JSONLab); if loading from a .jnirs, please see the 
 %               supported options for loadjson.m (part of JSONLab).
 %
 %    output:
@@ -48,7 +48,7 @@ if(~isempty(regexp(filename,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')) || ~isempty(rege
 elseif(regexp(filename,'\.[Jj][Nn][Ii][Rr][Ss]$'))
     jnirs=loadjson(filename,varargin{:});
 elseif(regexp(filename,'\.[Bb][Nn][Ii][Rr][Ss]$'))
-    jnirs=loadubjson(filename,varargin{:});
+    jnirs=loadbj(filename,varargin{:});
 else
     error('file suffix must be .snirf for SNIRF/HDF5, .jnirs for text JSNIRF, .bnirs for binary JSNIRF files');
 end

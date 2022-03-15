@@ -11,10 +11,10 @@ JSNIRF is a portable format for storage, interchange and processing data generat
 from functional near-infrared spectroscopy, or fNIRS - an emerging functional neuroimaging 
 technique. Built upon the JData and SNIRF specifications, a JSNIRF file has both a 
 text-based interface using the JavaScript Object Notation (JSON) [RFC4627] format 
-and a binary interface using the Universal Binary JSON (UBJSON) serialization format. 
+and a binary interface using the Universal Binary JSON (BJData) serialization format. 
 It contains a compatibility layer to provide a 1-to-1 mapping to the existing 
 HDF5 based SNIRF files. A JSNIRF file can be directly parsed by most existing 
-JSON and UBJSON parsers. Advanced features include optional hierarchical data 
+JSON and BJData parsers. Advanced features include optional hierarchical data 
 storage, grouping, compression, integration with heterogeneous scientific data 
 enabled by JData data serialization framework.
 
@@ -55,7 +55,7 @@ JSNIRF file is a plain JSON file, and has various advantages
 - JSNIRF can be readily parsed by numerous free JSON parsers available
 - Programming your own specialized JSNIRF parser is very easy to write
 
-The binary JSNIRF format uses a binary JSON format (UBJSON) which is also
+The binary JSNIRF format uses a binary JSON format (BJData) which is also
 - quasi-human readable despite it is binary
 - over 20 free parsers available
 - easy to write your own parser because of the simplicity
@@ -72,7 +72,7 @@ There are only two minor differences:
   If multiple measurement datasets are provided in the SNIRF data in the forms of
   `/nirs1`, `/nirs2` ..., or `/nirs/data1`. `/nirs/data2` ..., JSNIRF merges these
   data objects into struct/cell arrays, and removes the group indices from the 
-  group names. These grouped objects are stored as an JSON/UBJSON array object
+  group names. These grouped objects are stored as an JSON/BJData array object
   '[]' when saving to disk.
 * The `/formatVersion` object in the SNIRF data are moved from the root level 
   to a subfield of `SNIRFData`, this allows the JSNIRF data files to be easily
@@ -151,7 +151,7 @@ of the toolbox (i.e. the folder containing `savejnifti.m/loadjnifti.m`).
 In order for this toolbox to work, one must install the below dependencies
 - the `saveh5/loadh5` functions are provided by the EazyH5 toolbox at 
   http://github.com/fangq/eazyh5
-- the `savejson` and `saveubjson` functions are provided by the JSONLab 
+- the `savejson` and `savebj` functions are provided by the JSONLab 
   toolbox at http://github.com/fangq/jsonlab 
 - if data compression is specified by `'compression','zlib'` param/value 
   pairs, ZMat toolbox will be needed, http://github.com/fangq/zmat

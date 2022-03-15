@@ -21,11 +21,11 @@ function data=savejsnirf(jnirs, filename, varargin)
 %                *.jnirs for text JSNIRF file
 %                *.snirf or *.h5 for HDF5-based SNIRF file
 %        options: (optional) if saving to a .bnirs file, please see the options for
-%               saveubjson.m (part of JSONLab); if saving to .jnirs, please see the 
+%               savebj.m (part of JSONLab); if saving to .jnirs, please see the 
 %               supported options for savejson.m (part of JSONLab).
 %
 %    dependency:
-%        - the savejson and saveubjson functions are provided by the JSONLab 
+%        - the savejson and savebj functions are provided by the JSONLab 
 %          toolbox at http://github.com/fangq/jsonlab 
 %        - if data compression is specified by 'compression','zlib' param/value 
 %          pairs, ZMat toolbox will be needed, http://github.com/fangq/zmat
@@ -55,7 +55,7 @@ data='';
 if(regexp(filename,'\.[Jj][Nn][Ii][Rr][Ss]$'))
     data=savejson('',jnirs,'filename',filename,varargin{:});
 elseif(regexp(filename,'\.[Bb][Nn][Ii][Rr][Ss]$'))
-    data=saveubjson('',jnirs,'filename',filename,varargin{:});
+    data=savebj('',jnirs,'filename',filename,varargin{:});
 elseif(~isempty(regexp(filename,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once'))|| ~isempty(regexp(outfile,'\.[Hh]5$', 'once')))
     saveh5(jnirs,filename,varargin{:});
 else
