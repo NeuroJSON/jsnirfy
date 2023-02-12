@@ -35,6 +35,9 @@ opt=varargin2struct(varargin{:});
 if(~isfield(opt,'root'))
     opt.rootname='';
 end
+if(~isfield(opt,'variablelengthstring'))
+    opt.variablelengthstring=1;
+end
 
 if(isfield(data,'SNIRFData'))
     data.nirs=data.SNIRFData;
@@ -44,7 +47,7 @@ if(isfield(data,'SNIRFData'))
 end
 
 if(~isempty(outfile))
-    if(~isempty(regexp(outfile,'\.[Hh]5$', 'once'))) 
+    if(~isempty(regexp(outfile,'\.[Hh]5$', 'once')))
         saveh5(data,outfile,opt);
     elseif(~isempty(regexp(outfile,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')))
         data.nirs.data=forceindex(data.nirs.data,'measurementList');
