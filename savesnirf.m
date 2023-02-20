@@ -44,6 +44,11 @@ if(isfield(data,'SNIRFData'))
     data.formatVersion=data.SNIRFData.formatVersion;
     data.nirs=rmfield(data.nirs,'formatVersion');
     data=rmfield(data,'SNIRFData');
+    if(~isempty(regexp(data.formatVersion, '^1\.', 'once')))
+        if(length(data.nirs.data.measurementList) == 1 && length(data.nirs.data.measurementList.sourceIndex) > 1)
+            data.nirs.data.measurementList=soa2aos(data.nirs.data.measurementList);
+        end
+    end
 end
 
 if(~isempty(outfile))
