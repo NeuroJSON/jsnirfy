@@ -38,23 +38,55 @@ end
 if(~isfield(opt,'variablelengthstring'))
     opt.variablelengthstring=1;
 end
+if(~isfield(opt,'rowas1d'))
+    opt.rowas1d=1;
+end
 
 if(isfield(data,'SNIRFData'))
     data.nirs=data.SNIRFData;
     data.formatVersion=data.SNIRFData.formatVersion;
     data.nirs=rmfield(data.nirs,'formatVersion');
     data=rmfield(data,'SNIRFData');
-    if(~isempty(regexp(data.formatVersion, '^1\.', 'once')))
-        if(length(data.nirs.data.measurementList) == 1 && length(data.nirs.data.measurementList.sourceIndex) > 1)
-            data.nirs.data.measurementList=soa2aos(data.nirs.data.measurementList);
-        end
-    end
 end
 
 if(~isempty(outfile))
     if(~isempty(regexp(outfile,'\.[Hh]5$', 'once')))
         saveh5(data,outfile,opt);
     elseif(~isempty(regexp(outfile,'\.[Ss][Nn][Ii][Rr][Ff]$', 'once')))
+        if(isfield(data.nirs.data,'measurementList'))
+            forceint={'sourceIndex','detectorIndex','wavelengthIndex',...
+                      'dataType','dataTypeIndex','moduleIndex',...
+                      'sourceModuleIndex','detectorModuleIndex'};
+            for i=1:length(forceint)
+                if(isfield(data.nirs.data.measurementList, forceint{i}))
+                    data.nirs.data.measurementList.(forceint{i})=int32(data.nirs.data.measurementList.(forceint{i}));
+                end
+            end
+            if(length(data.nirs.data.measurementList)==1 ...
+                && length(data.nirs.data.measurementList.sourceIndex)>1)
+                data.nirs.data.measurementList=soa2aos(data.nirs.data.measurementList);
+            end
+        end
+        if(opt.rowas1d)
+            force1d.probe={'wavelengths','wavelengthsEmission','frequencies',...
+                'timeDelays','timeDelayWidths','momentOrders','correlationTimeDelays',...
+                'correlationTimeDelayWidths'};
+            force1d.data={'time'};
+            force1d.aux={'time'};
+            fields=fieldnames(force1d);
+            for i=1:length(fields)
+                for j=1:length(force1d.(fields{i}))
+                    if(isfield(data.nirs.(fields{i}), force1d.(fields{i}){j}))
+                        data.nirs.(fields{i}).(force1d.(fields{i}){j})=permute(data.nirs.(fields{i}).(force1d.(fields{i}){j})(:).', [3 4 5 6 1 2]);
+                    end
+                end
+            end
+        end
+        if(~isempty(regexp(data.formatVersion, '^1\.', 'once')))
+            if(length(data.nirs.data.measurementList) == 1 && length(data.nirs.data.measurementList.sourceIndex) > 1)
+                data.nirs.data.measurementList=soa2aos(data.nirs.data.measurementList);
+            end
+        end
         data.nirs.data=forceindex(data.nirs.data,'measurementList');
         data.nirs=forceindex(data.nirs,'data');
         data.nirs=forceindex(data.nirs,'stim');
