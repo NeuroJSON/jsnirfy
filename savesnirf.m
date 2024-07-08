@@ -72,12 +72,12 @@ if(~isempty(outfile))
                 'timeDelays','timeDelayWidths','momentOrders','correlationTimeDelays',...
                 'correlationTimeDelayWidths'};
             force1d.data={'time'};
-            force1d.aux={'time'};
+            force1d.aux={'time', 'timeOffset'};
             fields=fieldnames(force1d);
             for i=1:length(fields)
                 for j=1:length(force1d.(fields{i}))
                     if(isfield(data.nirs.(fields{i}), force1d.(fields{i}){j}))
-                        data.nirs.(fields{i}).(force1d.(fields{i}){j})=permute(data.nirs.(fields{i}).(force1d.(fields{i}){j})(:).', [3 4 5 6 1 2]);
+                        data.nirs.(fields{i}).(force1d.(fields{i}){j})=timeseries(data.nirs.(fields{i}).(force1d.(fields{i}){j})(:).');
                     end
                 end
             end
