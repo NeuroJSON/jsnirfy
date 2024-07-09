@@ -82,6 +82,18 @@ if(~isempty(outfile))
                 end
             end
         end
+        if(isfield(data.nirs,'probe'))
+            forcestrarray.probe={'sourceLabels','detectorLabels','landmarkLabels'};
+            forcestrarray.stim={'dataLabels'};
+            fields=fieldnames(forcestrarray);
+            for i=1:length(fields)
+                for j=1:length(forcestrarray.(fields{i}))
+                    if(isfield(data.nirs.(fields{i}), forcestrarray.(fields{i}){j}))
+                        data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})=timeseries(string(data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})(:).'));
+                    end
+                end
+            end
+        end
         if(~isempty(regexp(data.formatVersion, '^1\.', 'once')))
             if(length(data.nirs.data.measurementList) == 1 && length(data.nirs.data.measurementList.sourceIndex) > 1)
                 data.nirs.data.measurementList=soa2aos(data.nirs.data.measurementList);
