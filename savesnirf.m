@@ -59,6 +59,9 @@ if(~isempty(outfile))
                       'sourceModuleIndex','detectorModuleIndex'};
             for i=1:length(forceint)
                 if(isfield(data.nirs.data.measurementList, forceint{i}))
+                    if(iscell(data.nirs.data.measurementList.(forceint{i})))
+                        data.nirs.data.measurementList.(forceint{i})=cell2mat(data.nirs.data.measurementList.(forceint{i}));
+                    end
                     data.nirs.data.measurementList.(forceint{i})=int32(data.nirs.data.measurementList.(forceint{i}));
                 end
             end
@@ -77,6 +80,9 @@ if(~isempty(outfile))
             for i=1:length(fields)
                 for j=1:length(force1d.(fields{i}))
                     if(isfield(data.nirs.(fields{i}), force1d.(fields{i}){j}))
+                        if(iscell(data.nirs.(fields{i}).(force1d.(fields{i}){j})))
+                            data.nirs.(fields{i}).(force1d.(fields{i}){j})=cell2mat(data.nirs.(fields{i}).(force1d.(fields{i}){j}));
+                        end
                         data.nirs.(fields{i}).(force1d.(fields{i}){j})=timeseries(data.nirs.(fields{i}).(force1d.(fields{i}){j})(:).');
                     end
                 end
@@ -89,6 +95,9 @@ if(~isempty(outfile))
             for i=1:length(fields)
                 for j=1:length(forcestrarray.(fields{i}))
                     if(isfield(data.nirs.(fields{i}), forcestrarray.(fields{i}){j}))
+                        if(iscell(data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})))
+                            data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})=cell2mat(data.nirs.(fields{i}).(forcestrarray.(fields{i}){j}));
+                        end
                         data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})=timeseries(string(data.nirs.(fields{i}).(forcestrarray.(fields{i}){j})(:).'));
                     end
                 end
