@@ -1,4 +1,4 @@
-function as=soa2aos(starray)
+function as = soa2aos(starray)
 %
 %    as=soa2aos(starray)
 %
@@ -22,21 +22,20 @@ function as=soa2aos(starray)
 %    License: GPLv3 or Apache 2.0, see https://github.com/NeuroJSON/jsnirf for details
 %
 
-
-if(nargin<1 || ~isstruct(starray))
+if (nargin < 1 || ~isstruct(starray))
     error('you must give a struct with subfield of numeric vectors');
 end
 
-if(length(starray)>1)
-    as=starray;
-    return;
+if (length(starray) > 1)
+    as = starray;
+    return
 end
 
-allsize=structfun(@numel, starray);
-if(length(unique(allsize))>1)
-    as=starray;
-    return;
+allsize = structfun(@numel, starray);
+if (length(unique(allsize)) > 1)
+    as = starray;
+    return
 end
 
-strcell=[fieldnames(starray) struct2cell(structfun(@num2cell, starray, 'uniformoutput', 0))]';
-as=struct(strcell{:});
+strcell = [fieldnames(starray) struct2cell(structfun(@num2cell, starray, 'uniformoutput', 0))]';
+as = struct(strcell{:});
