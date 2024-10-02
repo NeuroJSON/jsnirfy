@@ -58,7 +58,7 @@ JSNIRF file is a plain JSON file, and has various advantages
 
 The binary JSNIRF format uses a binary JSON format (BJData) which is also
 - quasi-human readable despite it is binary
-- free parsers available for [MATLAB](http://github.com/fangq/jsonlab),
+- free parsers available for [MATLAB](http://github.com/NeuroJSON/jsonlab),
   [Python](https://pypi.org/project/bjdata/), [C++](https://github.com/NeuroJSON/json),
   and [C](https://github.com/NeuroJSON/ubj)
 - easy to write your own parser because of the simplicity
