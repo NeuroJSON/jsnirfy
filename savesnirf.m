@@ -84,12 +84,14 @@ if (~isempty(outfile))
             fields = fieldnames(force1d);
             for i = 1:length(fields)
                 for j = 1:length(force1d.(fields{i}))
-                    if (isfield(data.nirs.(fields{i}), force1d.(fields{i}){j}))
-                        if (iscell(data.nirs.(fields{i}).(force1d.(fields{i}){j})))
-                            data.nirs.(fields{i}).(force1d.(fields{i}){j}) = cell2mat(data.nirs.(fields{i}).(force1d.(fields{i}){j}));
-                        end
-                        if (exist('timeseries', 'file'))
-                            data.nirs.(fields{i}).(force1d.(fields{i}){j}) = timeseries(data.nirs.(fields{i}).(force1d.(fields{i}){j})(:).');
+                    for k = 1:length(data.nirs.(fields{i}))
+                        if (isfield(data.nirs.(fields{i})(k), force1d.(fields{i}){j}))
+                            if (iscell(data.nirs.(fields{i})(k).(force1d.(fields{i}){j})))
+                                data.nirs.(fields{i})(k).(force1d.(fields{i}){j}) = cell2mat(data.nirs.(fields{i})(k).(force1d.(fields{i}){j}));
+                            end
+                            if (exist('timeseries', 'file'))
+                                data.nirs.(fields{i})(k).(force1d.(fields{i}){j}) = timeseries(data.nirs.(fields{i})(k).(force1d.(fields{i}){j})(:).');
+                            end
                         end
                     end
                 end
